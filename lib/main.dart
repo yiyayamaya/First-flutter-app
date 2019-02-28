@@ -3,105 +3,52 @@ import 'package:flutter/material.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+
+
+  var outvalue=1;
+  FavoriteWidget myf=new FavoriteWidget();
+
+  
   @override
   Widget build(BuildContext context) {
-    Widget titleSection = Container(
-      padding: const EdgeInsets.all(32),
-      child: Row(
-        children: [
-          Expanded(
-            /*1*/
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                /*2*/
-                Container(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Text(
-                    'Oeschinen Lake Campground',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Text(
-                  'Kandersteg, Switzerland',
-                  style: TextStyle(
-                    color: Colors.grey[500],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+    Widget firstw = Container(
+      child: myf,
     );
-
-    Color color = Theme.of(context).primaryColor;
-
-    Widget buttonSection = Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          _buildButtonColumn(color, Icons.call, 'CALL'),
-          _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
-          _buildButtonColumn(color, Icons.share, 'SHARE'),
-        ],
-      ),
-    );
-
-    Widget textSection = Container(
-        padding: const EdgeInsets.all(32),
-        child: Row(children: [
-          Text(
-            '1',
-            softWrap: true,
-          ),
-          FavoriteWidget(),
-        ]));
 
     return MaterialApp(
-      title: 'Flutter layout demo',
+      title: '文字冒险',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Flutter layout demo'),
+          title: Text('这是一个文字冒险'),
+          
         ),
         body: ListView(
           children: [
-            Image.asset(
-              'images/lake.jpg',
-              width: 600,
-              height: 240,
-              fit: BoxFit.cover,
-            ),
-            titleSection,
-            buttonSection,
-            textSection,
+
+
+              IconButton(
+          icon: (Icon(Icons.star)),
+          color: Colors.red[500],
+          onPressed: changevalue,
+        ),
+
+             new Text(
+              outvalue.toString()),
+            firstw,
           ],
         ),
       ),
     );
   }
+  
 
+void changevalue(){
+print(myf.hashCode);
+
+print(myf.createState().hashCode);
+}
   Column _buildButtonColumn(Color color, IconData icon, String label) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(icon, color: color),
-        Container(
-          margin: const EdgeInsets.only(top: 8),
-          child: Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: color,
-            ),
-          ),
-        ),
-      ],
-    );
+    return Column();
   }
 }
 
@@ -110,62 +57,44 @@ class FavoriteWidget extends StatefulWidget {
   @override
   _FavoriteWidgetState createState() => _FavoriteWidgetState();
 }
-// #enddocregion FavoriteWidget
 
-// #docregion _FavoriteWidgetState, _FavoriteWidgetState-fields, _FavoriteWidgetState-build
+
+
 class _FavoriteWidgetState extends State<FavoriteWidget> {
-  // #enddocregion _FavoriteWidgetState-build
-  bool _isFavorited = true;
-  int _favoriteCount = 41;
 
-  String thetext = 'null';
+  
+  var questionlist = ["第一个问题", "第二个问题", "第三个问题"];
+
+  String thetext = '';
+
+  int indexofques = 0;
   void pressstar() {
     setState(() {
-      thetext = '⭐';
+      indexofques++;
+      if (indexofques >= questionlist.length) {
+        indexofques = indexofques - questionlist.length;
+      }
+      thetext = questionlist[indexofques];
+     
     });
   }
 
   void presssnow() {
     setState(() {
-      thetext = '❄';
-    });
-  }
-  // #enddocregion _FavoriteWidgetState-fields
-
-  // #docregion _toggleFavorite
-  void _toggleFavorite() {
-    setState(() {
-      if (_isFavorited) {
-        _favoriteCount -= 1;
-        _isFavorited = false;
-      } else {
-        _favoriteCount += 1;
-        _isFavorited = true;
+      indexofques++;
+      if (indexofques >= questionlist.length) {
+        indexofques = indexofques - questionlist.length;
       }
+      thetext = questionlist[indexofques];
+
     });
   }
-  // #enddocregion _toggleFavorite
-
-  // #docregion _FavoriteWidgetState-build
+ 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Container(
-          padding: EdgeInsets.all(0),
-          child: IconButton(
-            icon: (_isFavorited ? Icon(Icons.star) : Icon(Icons.star_border)),
-            color: Colors.red[500],
-            onPressed: _toggleFavorite,
-          ),
-        ),
-        SizedBox(
-          width: 18,
-          child: Container(
-            child: Text('$_favoriteCount'),
-          ),
-        ),
         IconButton(
           icon: (Icon(Icons.star)),
           color: Colors.red[500],
@@ -180,5 +109,5 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       ],
     );
   }
-  // #docregion _FavoriteWidgetState-fields
+
 }
