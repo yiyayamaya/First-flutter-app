@@ -243,7 +243,6 @@ class _PictureWidgetState extends State<PictureWidget> {
 
     return Column(
       children: [
-        
         new Container(
             padding: const EdgeInsets.fromLTRB(50, 70, 50, 150),
             child: new Text("Abandon",
@@ -251,52 +250,63 @@ class _PictureWidgetState extends State<PictureWidget> {
                   color: Colors.blue,
                   fontSize: 40.0,
                 ))),
-
-      
         new Center(
-  child: new Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-      new Image.asset('images/lake.jpg',
-      width: 190.0,
-                      height: 144.4,),
+          child: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
 
-                      new Image.asset('images/lake.jpg',
-      width: 190.0,
-                      height: 144.4,),
-      
-    ]
-  ),
-),
+                new GestureDetector(
+                    onTap: (){
+                     print("1");
+                      },
+                child:new Image.asset(
+                  'images/lake.jpg',
+                  width: 190.0,
+                  height: 144.4,
+                ),),
 
-
-new Container(
-   padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-  child:
- new Center(
-   
-  child: new Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-      new Image.asset('images/lake.jpg',
-      width: 190.0,
-                      height: 144.4,),
-
-                      new Image.asset('images/lake.jpg',
-      width: 190.0,
-                      height: 144.4,),
-      
-    ]
-  ),
-),)
+            new GestureDetector(
+                    onTap: (){
+                     print("2");
+                      },
+                child:new Image.asset(
+                  'images/lake.jpg',
+                  width: 190.0,
+                  height: 144.4,
+                ),),
 
 
+              ]),
+        ),
+        new Container(
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+          child: new Center(
+            child: new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
 
+                 new GestureDetector(
+                    onTap: (){
+                     print("3");
+                      },
+                child:new Image.asset(
+                  'images/lake.jpg',
+                  width: 190.0,
+                  height: 144.4,
+                ),),
 
-
-
-
-        
+                  new GestureDetector(
+                    onTap: (){
+                     print("4");
+                      },
+                child:new Image.asset(
+                  'images/lake.jpg',
+                  width: 190.0,
+                  height: 144.4,
+                ),),
+                ]),
+          ),
+        )
       ],
     );
   }
