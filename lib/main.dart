@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demos',
       routes: {
         '/': (BuildContext context) => new Home(),
-        '/login': (BuildContext context) => new FavoriteWidget()
+        '/login': (BuildContext context) => new PictureWidget()
       },
     );
 
@@ -46,7 +46,7 @@ class SecondScreen extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              new MaterialPageRoute(builder: (context) => new FavoriteWidget()),
+              new MaterialPageRoute(builder: (context) => new PictureWidget()),
             );
           },
         ),
@@ -187,10 +187,6 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
   }
 }
 
-
-
-
-
 class PictureWidget extends StatefulWidget {
   @override
   _PictureWidgetState createState() => _PictureWidgetState();
@@ -247,45 +243,60 @@ class _PictureWidgetState extends State<PictureWidget> {
 
     return Column(
       children: [
+        
         new Container(
-            padding: const EdgeInsets.fromLTRB(50, 70, 50, 20),
-            child: new Image.asset('images/lake.jpg')),
-        new Container(
-          padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-          child: new RaisedButton(
-            child: new Text(choiceA),
-            onPressed: () {
-              makechoice('A', correctchoice);
-            },
-          ),
-        ),
-        new Container(
-          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-          child: new RaisedButton(
-            child: new Text(choiceB),
-            onPressed: () {
-              makechoice('B', correctchoice);
-            },
-          ),
-        ),
-        new Container(
-          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-          child: new RaisedButton(
-            child: new Text(choiceC),
-            onPressed: () {
-              makechoice('C', correctchoice);
-            },
-          ),
-        ),
-        new Container(
-          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-          child: new RaisedButton(
-            child: new Text(choiceD),
-            onPressed: () {
-              makechoice('D', correctchoice);
-            },
-          ),
-        ),
+            padding: const EdgeInsets.fromLTRB(50, 70, 50, 150),
+            child: new Text("Abandon",
+                style: new TextStyle(
+                  color: Colors.blue,
+                  fontSize: 40.0,
+                ))),
+
+      
+        new Center(
+  child: new Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      new Image.asset('images/lake.jpg',
+      width: 190.0,
+                      height: 144.4,),
+
+                      new Image.asset('images/lake.jpg',
+      width: 190.0,
+                      height: 144.4,),
+      
+    ]
+  ),
+),
+
+
+new Container(
+   padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+  child:
+ new Center(
+   
+  child: new Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      new Image.asset('images/lake.jpg',
+      width: 190.0,
+                      height: 144.4,),
+
+                      new Image.asset('images/lake.jpg',
+      width: 190.0,
+                      height: 144.4,),
+      
+    ]
+  ),
+),)
+
+
+
+
+
+
+
+        
       ],
     );
   }
@@ -321,12 +332,6 @@ class _PictureWidgetState extends State<PictureWidget> {
     );
   }
 }
-
-
-
-
-
-
 
 class Article {
   String title;
@@ -510,7 +515,7 @@ class ProfileNavigator extends StatelessWidget {
             builder = (BuildContext context) => new Profile();
             break;
           case 'login':
-            builder = (BuildContext context) => new FavoriteWidget();
+            builder = (BuildContext context) => new PictureWidget();
             break;
           default:
             throw new Exception('Invalid route: ${settings.name}');
