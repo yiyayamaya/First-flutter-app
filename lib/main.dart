@@ -7,10 +7,28 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    /*
     return MaterialApp(
       title: '文字冒险',
-      home: new FavoriteWidget(),
+      home: new Home(),
     );
+*/
+    return new MaterialApp(
+      title: 'Flutter Demos',
+      routes: {
+        '/': (BuildContext context) => new Home(),
+        '/login': (BuildContext context) => new FavoriteWidget()
+      },
+    );
+
+/*
+    return new MaterialApp(
+      title: 'Navigation',
+      initialRoute: '/',
+      routes: <String, WidgetBuilder>{
+        '/': (BuildContext context) => new ArticleListScreen(),
+      },
+    );*/
   }
 }
 
@@ -19,15 +37,13 @@ class SecondScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        
-        automaticallyImplyLeading:false,
+        automaticallyImplyLeading: false,
         title: new Text('今天的背完了'),
       ),
       body: new Center(
         child: new RaisedButton(
           child: new Text('再来25'),
           onPressed: () {
-            
             Navigator.push(
               context,
               new MaterialPageRoute(builder: (context) => new FavoriteWidget()),
@@ -46,8 +62,6 @@ class FavoriteWidget extends StatefulWidget {
 }
 
 class _FavoriteWidgetState extends State<FavoriteWidget> {
-  var questionlist = ["第一个问题", "第二个问题", "第三个问题"];
-
   int indexofques = 0;
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
@@ -60,13 +74,10 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
   ];
 
   var listofright = ['A', 'A', 'A', 'A'];
-  
 
   var thetext = '';
 
   int indexofword = 0;
-
- 
 
   void makechoice(var mychoice, var mycorrectchoice) {
     print("请看这里" + mychoice + " " + mycorrectchoice);
@@ -99,70 +110,47 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
     var choiceC = (listofanswer[indexofques])[2];
     var choiceD = (listofanswer[indexofques])[3];
 
-    return Row(
+    return Column(
       children: [
-        /*
-        new IconButton(
-          icon: new Icon(Icons.star),
-          color: Colors.red[500],
-          onPressed: pressstar,
+        new Container(
+            padding: const EdgeInsets.fromLTRB(50, 70, 50, 20),
+            child: new Image.asset('images/lake.jpg')),
+        new Container(
+          padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+          child: new RaisedButton(
+            child: new Text(choiceA),
+            onPressed: () {
+              makechoice('A', correctchoice);
+            },
+          ),
         ),
-        new IconButton(
-          icon: new Icon(Icons.ac_unit),
-          color: Colors.blue[500],
-          onPressed: presssnow,1
-        ),*/
-
-        new RaisedButton(
-          child: new Text(choiceA),
-          onPressed: () {
-            makechoice('A', correctchoice);
-          },
+        new Container(
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+          child: new RaisedButton(
+            child: new Text(choiceB),
+            onPressed: () {
+              makechoice('B', correctchoice);
+            },
+          ),
         ),
-        new RaisedButton(
-          child: new Text(choiceB),
-          onPressed: () {
-            makechoice('B', correctchoice);
-          },
+        new Container(
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+          child: new RaisedButton(
+            child: new Text(choiceC),
+            onPressed: () {
+              makechoice('C', correctchoice);
+            },
+          ),
         ),
-        new RaisedButton(
-          child: new Text(choiceC),
-          onPressed: () {
-            makechoice('C', correctchoice);
-          },
+        new Container(
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+          child: new RaisedButton(
+            child: new Text(choiceD),
+            onPressed: () {
+              makechoice('D', correctchoice);
+            },
+          ),
         ),
-        new RaisedButton(
-          child: new Text(choiceD),
-          onPressed: () {
-            makechoice('D', correctchoice);
-          },
-        ),
-
-        /*
-         new Text(
-              '学习Text',
-              textAlign: TextAlign.center, //文本对齐方式  居中
-              textDirection: TextDirection.ltr, //文本方向
-              softWrap: false, //是否自动换行 false文字不考虑容器大小  单行显示   超出；屏幕部分将默认截断处理
-              overflow: TextOverflow
-                  .ellipsis, //文字超出屏幕之后的处理方式  TextOverflow.clip剪裁   TextOverflow.fade 渐隐  TextOverflow.ellipsis省略号
-              textScaleFactor: 2.0, //字体显示的赔率
-              maxLines: 10, //最大行数
-              style: new TextStyle(
-                decorationColor: const Color(0xffffffff), //线的颜色
-                decoration: TextDecoration
-                    .none, //none无文字装饰   lineThrough删除线   overline文字上面显示线    underline文字下面显示线
-                decorationStyle: TextDecorationStyle
-                    .solid, //文字装饰的风格  dashed,dotted虚线(简短间隔大小区分)  double三条线  solid两条线
-                wordSpacing: 0.0, //单词间隙(负值可以让单词更紧凑)
-                letterSpacing: 0.0, //字母间隙(负值可以让字母更紧凑)
-                fontStyle: FontStyle.italic, //文字样式，斜体和正常
-                fontSize: 2.0, //字体大小
-                fontWeight: FontWeight.w900, //字体粗细  粗体和正常
-                color: const Color(0xffffffff), //文字颜色
-              ),
-            ),
-            */
       ],
     );
   }
@@ -189,11 +177,384 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
 
           return new Scaffold(
             appBar: new AppBar(
-              title: new Text(indexofques.toString()+'选错了'),
+              title: new Text(indexofques.toString() + '选错了'),
             ),
             body: new ListView(children: divided),
           );
         },
+      ),
+    );
+  }
+}
+
+
+
+
+
+class PictureWidget extends StatefulWidget {
+  @override
+  _PictureWidgetState createState() => _PictureWidgetState();
+}
+
+class _PictureWidgetState extends State<PictureWidget> {
+  int indexofques = 0;
+  final _biggerFont = const TextStyle(fontSize: 18.0);
+
+  final _saved = new Set<WordPair>();
+  static List<List<String>> listofanswer = [
+    ['1A', '1B', '1C', '1D'],
+    ['2A', '2B', '2C', '2D'],
+    ['3A', '3B', '3C', '3D'],
+    ['4A', '4B', '4C', '4D']
+  ];
+
+  var listofright = ['A', 'A', 'A', 'A'];
+
+  var thetext = '';
+
+  int indexofword = 0;
+
+  void makechoice(var mychoice, var mycorrectchoice) {
+    print("请看这里" + mychoice + " " + mycorrectchoice);
+
+    setState(() {
+      if (mychoice == mycorrectchoice) {
+        print("选对啦");
+
+        if (indexofques >= 3) {
+          Navigator.pop(context);
+          Navigator.push(
+            context,
+            new MaterialPageRoute(builder: (context) => new SecondScreen()),
+          );
+        } else {
+          indexofques++;
+        }
+      } else {
+        print("没选对");
+        _pushSaved(indexofques);
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var correctchoice = listofright[indexofques];
+    var choiceA = (listofanswer[indexofques])[0];
+    var choiceB = (listofanswer[indexofques])[1];
+    var choiceC = (listofanswer[indexofques])[2];
+    var choiceD = (listofanswer[indexofques])[3];
+
+    return Column(
+      children: [
+        new Container(
+            padding: const EdgeInsets.fromLTRB(50, 70, 50, 20),
+            child: new Image.asset('images/lake.jpg')),
+        new Container(
+          padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+          child: new RaisedButton(
+            child: new Text(choiceA),
+            onPressed: () {
+              makechoice('A', correctchoice);
+            },
+          ),
+        ),
+        new Container(
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+          child: new RaisedButton(
+            child: new Text(choiceB),
+            onPressed: () {
+              makechoice('B', correctchoice);
+            },
+          ),
+        ),
+        new Container(
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+          child: new RaisedButton(
+            child: new Text(choiceC),
+            onPressed: () {
+              makechoice('C', correctchoice);
+            },
+          ),
+        ),
+        new Container(
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+          child: new RaisedButton(
+            child: new Text(choiceD),
+            onPressed: () {
+              makechoice('D', correctchoice);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _pushSaved(int indexofques) {
+    print("我在里面");
+    Navigator.of(context).push(
+      new MaterialPageRoute(
+        builder: (context) {
+          final tiles = _saved.map(
+            (pair) {
+              return new ListTile(
+                title: new Text(
+                  pair.asPascalCase,
+                  style: _biggerFont,
+                ),
+              );
+            },
+          );
+          final divided = ListTile.divideTiles(
+            context: context,
+            tiles: tiles,
+          ).toList();
+
+          return new Scaffold(
+            appBar: new AppBar(
+              title: new Text(indexofques.toString() + '选错了'),
+            ),
+            body: new ListView(children: divided),
+          );
+        },
+      ),
+    );
+  }
+}
+
+
+
+
+
+
+
+class Article {
+  String title;
+  String content;
+
+  Article({this.title, this.content});
+}
+
+class ArticleListScreen extends StatelessWidget {
+  final List<Article> articles = new List.generate(
+    10,
+    (i) => new Article(
+          title: 'Article $i',
+          content: 'Article $i: The quick brown fox jumps over the lazy dog.',
+        ),
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text('Article List'),
+      ),
+      body: new ListView.builder(
+        itemCount: articles.length,
+        itemBuilder: (context, index) {
+          return new ListTile(
+            title: new Text(articles[index].title),
+            onTap: () async {
+              String result = await Navigator.push(
+                context,
+                new MaterialPageRoute(
+                  builder: (context) => new ContentScreen(articles[index]),
+                ),
+              );
+
+              if (result != null) {
+                Scaffold.of(context).showSnackBar(
+                  new SnackBar(
+                    content: new Text("$result"),
+                    duration: const Duration(seconds: 1),
+                  ),
+                );
+              }
+            },
+          );
+        },
+      ),
+    );
+  }
+}
+
+class ContentScreen extends StatelessWidget {
+  final Article article;
+
+  ContentScreen(this.article);
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text('${article.title}'),
+      ),
+      body: new Padding(
+        padding: new EdgeInsets.all(15.0),
+        child: new Column(
+          children: <Widget>[
+            new Text('${article.content}'),
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                new RaisedButton(
+                  onPressed: () {
+                    Navigator.pop(context, 'Like');
+                  },
+                  child: new Text('Like'),
+                ),
+                new RaisedButton(
+                  onPressed: () {
+                    Navigator.pop(context, 'Unlike');
+                  },
+                  child: new Text('Unlike'),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Home extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return new _HomeState();
+  }
+}
+
+class _HomeState extends State<Home> {
+  int _currentIndex = 0;
+  final List<Widget> _children = [
+    new HomeNavigator(),
+    new ProfileNavigator(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _children[_currentIndex],
+      bottomNavigationBar: new BottomNavigationBar(
+        onTap: onTabTapped,
+        currentIndex: _currentIndex,
+        items: [
+          new BottomNavigationBarItem(
+            icon: new Icon(Icons.home),
+            title: new Text('Home'),
+          ),
+          new BottomNavigationBarItem(
+            icon: new Icon(Icons.person),
+            title: new Text('Profile'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+}
+
+class PlaceholderWidget extends StatelessWidget {
+  final String text;
+
+  PlaceholderWidget(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return new Center(
+      child: new Text(text),
+    );
+  }
+}
+
+class HomeNavigator extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Navigator(
+      initialRoute: 'home',
+      onGenerateRoute: (RouteSettings settings) {
+        WidgetBuilder builder;
+        switch (settings.name) {
+          case 'home':
+            builder = (BuildContext context) => new HomePage();
+            break;
+          case 'demo1':
+            builder = (BuildContext context) => new ArticleListScreen();
+            break;
+          default:
+            throw new Exception('Invalid route: ${settings.name}');
+        }
+
+        return new MaterialPageRoute(builder: builder, settings: settings);
+      },
+    );
+  }
+}
+
+class ProfileNavigator extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Navigator(
+      initialRoute: 'profile',
+      onGenerateRoute: (RouteSettings settings) {
+        WidgetBuilder builder;
+        switch (settings.name) {
+          case 'profile':
+            builder = (BuildContext context) => new Profile();
+            break;
+          case 'login':
+            builder = (BuildContext context) => new FavoriteWidget();
+            break;
+          default:
+            throw new Exception('Invalid route: ${settings.name}');
+        }
+
+        return new MaterialPageRoute(builder: builder, settings: settings);
+      },
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text('Home'),
+      ),
+      body: new Center(
+        child: new RaisedButton(
+          child: new Text('demo1'),
+          onPressed: () {
+            Navigator.of(context).pushNamed('demo1');
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class Profile extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text('Profile'),
+      ),
+      body: new Center(
+        child: new RaisedButton(
+          child: new Text('开始背单词'),
+          onPressed: () {
+            Navigator.of(context).pushNamed('login');
+          },
+        ),
       ),
     );
   }
